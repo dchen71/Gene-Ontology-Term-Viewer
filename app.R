@@ -56,15 +56,19 @@ server = (function(input, output) {
 
 # Define UI for application that renders genename to anova/kruskal test
 ui = (fluidPage(
-  #Input name of gene
-  textInput("geneName", "Gene Name"),
-  #Show off the breakdown in ontology
-  h3("Molecular Function"),
-  tableOutput("mf"),
-  h3("Cellular Components"),
-  tableOutput("cc"),
-  h3("Biological Processes"),
-  tableOutput("bp")
+  titlePanel("Gene Ontology", windowTitle = "Gene Ontology"),
+  mainPanel(
+    #Input name of gene
+    textInput("geneName", "Gene Name"),
+    #Show off the breakdown in ontology
+    h3("Molecular Function"),
+    tableOutput("mf"),
+    h3("Cellular Components"),
+    tableOutput("cc"),
+    h3("Biological Processes"),
+    tableOutput("bp")
+  )
+
   
 ))
 
