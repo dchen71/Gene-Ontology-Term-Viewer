@@ -55,23 +55,54 @@ get_ontology = function(){
         return(mf)
       }
     })
+    
+    #Renders # of hits found
+    output$found = renderText({
+      if(input$geneName != ""){
+        return(paste("Found", nrow(go_ids()), "entries"))
+      }
+    })
+    
+    #Renders table of types of ontologies found
+    output$go_breakdown = renderTable({
+      if(input$geneName != ""){
+        return(table(go_ids()$Ontology))
+      }
+    })
   })
   
   # Define mini UI for application that renders genename to anova/kruskal test
   ui = (miniPage(
     gadgetTitleBar("Gene Ontology"),
-    miniContentPanel(
-      #Input name of gene
-      textInput("geneName", "Gene Name"),
-      #Show off the breakdown in ontology
-      h3("Molecular Function"),
-      tableOutput("mf"),
-      h3("Cellular Components"),
-      tableOutput("cc"),
-      h3("Biological Processes"),
-      tableOutput("bp")
+    miniTabstripPanel(
+      miniTabPanel("Search", icon = icon("search"),
+                   miniContentPanel(
+                     textInput("geneName", "Gene Name"),
+                     textOutput("found"),
+                     tableOutput("go_breakdown")
+                   )
+      ),
+      miniTabPanel("Molecular Function", icon = icon("sliders"),
+                   miniContentPanel(
+                     h3("Molecular Function"),
+                     tableOutput("mf")
+                   )
+      ),
+      miniTabPanel("Cellular Components", icon = icon("dropbox"),
+                   miniContentPanel(
+                     h3("Cellular Components"),
+                     tableOutput("cc")
+                   )
+      ),
+      miniTabPanel("Biological Processes", icon = icon("forumbee"),
+                   miniContentPanel(
+                     h3("Biological Processes"),
+                     tableOutput("bp")
+                   )
+      )
     )
-
+    
+    
     
   ))
   
