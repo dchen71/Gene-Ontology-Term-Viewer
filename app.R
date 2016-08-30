@@ -4,6 +4,7 @@
 
 library(shiny)
 library(biomaRt)
+library(GO.db)
 
 #Get the mapping from ensembl gene id to external
 ensembl = useMart("ENSEMBL_MART_ENSEMBL")
@@ -60,6 +61,7 @@ ui = (fluidPage(
   mainPanel(
     #Input name of gene
     textInput("geneName", "Gene Name"),
+    submitButton("Submit"),
     #Show off the breakdown in ontology
     h3("Molecular Function"),
     tableOutput("mf"),

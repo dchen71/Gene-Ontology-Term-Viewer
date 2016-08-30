@@ -5,6 +5,7 @@
 library(shiny)
 library(miniUI)
 library(biomaRt)
+library(GO.db)
 
 #Gadget function to find gene ontology by gene name
 get_ontology = function(){
@@ -78,6 +79,7 @@ get_ontology = function(){
       miniTabPanel("Search", icon = icon("search"),
                    miniContentPanel(
                      textInput("geneName", "Gene Name"),
+                     submitButton("Submit"),
                      textOutput("found"),
                      tableOutput("go_breakdown")
                    )
